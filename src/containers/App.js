@@ -1,7 +1,7 @@
 import {
 
 } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 import 'intl';
 import 'intl/locale-data/jsonp/fr';
 import { addLocaleData } from 'react-intl';
@@ -15,9 +15,19 @@ global.Intl = require('intl');
 
 [fr].forEach(addLocaleData);
 
-const SimpleApp = DrawerNavigator({
-  Home: { screen: Home },
-  Game: { screen: Game },
+const SimpleApp = StackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Game: {
+    screen: Game,
+    navigationOptions: {
+      header: null,
+    },
+  },
 });
 
 export default SimpleApp;

@@ -45,6 +45,8 @@ export default StyleSheet.create({
     fontSize: 64,
     color: Colors.white,
     marginTop: -15,
+    backgroundColor: 'transparent',
+
   },
   subtitle: {
     fontFamily: Fonts.Brandon,
@@ -52,23 +54,7 @@ export default StyleSheet.create({
     fontSize: 36,
     color: Colors.white,
     marginTop: -25,
-  },
-
-  score: {
-    flexDirection: 'row',
-    marginTop: -10,
-  },
-  scoreLeft: {
-    fontFamily: Fonts.Brandon,
-    fontWeight: 'bold',
-    fontSize: 22,
-    color: Colors.white,
-  },
-  scoreRight: {
-    fontFamily: Fonts.Brandon,
-    fontWeight: '100',
-    fontSize: 22,
-    color: Colors.white,
+    backgroundColor: 'transparent',
   },
 
   footerWrapper: {
@@ -86,5 +72,6 @@ export default StyleSheet.create({
     fontSize: 22,
     color: Colors.white,
     marginRight: 9,
+    backgroundColor: 'transparent',
   },
 });

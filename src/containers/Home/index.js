@@ -14,6 +14,7 @@ import translations from './translations.js';
 import styles from './styles.js';
 import { Images } from '../../theme';
 import BackgroundFlag from '../../components/BackgroundFlag';
+import Score from '../../components/Score';
 
 class Home extends Component {
   static propTypes = {
@@ -60,20 +61,10 @@ class Home extends Component {
               >
                 {this.props.intl.formatMessage(translations.homeSubtitle).toUpperCase()}
               </Text>
-              <View
-                style={styles.score}
-              >
-                <Text
-                  style={styles.scoreLeft}
-                >
-                  23
-                </Text>
-                <Text
-                  style={styles.scoreRight}
-                >
-                  /220
-                </Text>
-              </View>
+              <Score
+                winNumber={22}
+                totalNumber={250}
+              />
             </View>
 
             <View

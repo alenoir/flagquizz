@@ -3,6 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { autoRehydrate } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
+import Immutable from 'immutable';
 import R from 'ramda';
 import devTools from 'remote-redux-devtools';
 
@@ -22,7 +23,20 @@ export default (persistConfig, customMiddleware) => {
     const USE_LOGGING = __DEV__;
     const logger = createLogger({
       predicate: (getState, { type }) =>
-      USE_LOGGING && R.not(R.contains(type, SAGA_LOGGING_BLACKLIST)),
+        USE_LOGGING && R.not(R.contains(type, SAGA_LOGGING_BLACKLIST)),
+      stateTransformer: (state) => {
+        const newState = {};
+
+        for (const i of Object.keys(state)) {
+          if (Immutable.Iterable.isIterable(state[i])) {
+            newState[i] = state[i].toJS();
+          } else {
+            newState[i] = state[i];
+          }
+        }
+
+        return newState;
+      },
     });
     middleware.push(logger);
   }
