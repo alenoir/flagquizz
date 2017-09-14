@@ -50,8 +50,6 @@ export default class BackgroundFlag extends Component {
     const imageArray = Array.isArray(images) ? images : [images];
     const currentImage = this.state.currentImage;
 
-    console.log('111111', currentImage);
-
     if (currentImage === 1) {
       this.setState({
         image2: imageArray[Math.floor(Math.random() * imageArray.length)],
@@ -63,8 +61,6 @@ export default class BackgroundFlag extends Component {
         currentImage: 1,
       });
     }
-
-    console.log('22222', currentImage);
 
     Animated.parallel([
       Animated.timing(

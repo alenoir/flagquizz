@@ -50,6 +50,7 @@ class Game extends Component {
 
     const { width } = Dimensions.get('window');
 
+    this.inputPosition = new Animated.Value(0);
     this.imageScale = new Animated.Value(1);
     this.inputOpacity = new Animated.Value(1);
     this.buttonOpacity = new Animated.Value(0);
@@ -62,7 +63,7 @@ class Game extends Component {
       currentFlagImage = FlagImages[currentQuestion.get('flag').get('alpha2Code').toLowerCase()];
     }
     this.state = {
-      step: gameSteps.loading,
+      step: currentQuestion ? gameSteps.playing : gameSteps.loading,
       flag: null,
       answer: '',
       keyboardHeight: 200,
@@ -70,6 +71,7 @@ class Game extends Component {
       imageHeight: width * (2 / 3),
       currentFlagImage,
       inputFontSize: 36,
+      bottomInputColor: Colors.white,
     };
   }
   //
@@ -80,19 +82,28 @@ class Game extends Component {
 
   componentDidMount() {
     const { question } = this.props;
-
+    console.log('componentDidMount', question.get('current'));
     if (!question.get('current')) {
       this.props.questionActions.questionRequest();
     }
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('++++ componentWillReceiveProps', nextProps.question.get('errored'));
     const nextState = {};
     if (nextProps.question.get('loading') !== this.props.question.get('loading') && nextProps.question.get('loading')) {
       nextState.step = gameSteps.loading;
     } else if (nextProps.question.get('errored') !== this.props.question.get('errored') && nextProps.question.get('errored')) {
       nextState.step = gameSteps.errored;
+      nextState.bottomInputColor = Colors.red;
       nextState.answer = '';
+
+      setTimeout(() => {
+        this.setState({
+          step: gameSteps.playing,
+          bottomInputColor: Colors.white,
+        });
+      }, 1000);
     } else if (nextProps.question.get('succeded') !== this.props.question.get('succeded') && nextProps.question.get('succeded')) {
       nextState.step = gameSteps.win;
       nextState.answer = '';
@@ -104,7 +115,7 @@ class Game extends Component {
     }
 
     const currentQuestion = nextProps.question.get('current');
-    if (currentQuestion) {
+    if (currentQuestion && currentQuestion.get('flag')) {
       nextState.currentFlagImage = FlagImages[currentQuestion.get('flag').get('alpha2Code').toLowerCase()];
     }
 
@@ -131,6 +142,22 @@ class Game extends Component {
         nextButtonOpacity = 0;
         nextNameOpacity = 0;
         nextBadgeScale = 0;
+
+        Animated.sequence([ // decay, then spring to start and twirl
+          Animated.timing(this.inputPosition, {
+            toValue: -20,
+            duration: 50,
+          }),
+          Animated.timing(this.inputPosition, {
+            toValue: 20,
+            duration: 50,
+          }),
+          Animated.timing(this.inputPosition, {
+            toValue: 0,
+            duration: 50,
+          }),
+        ]).start();
+
         break;
       case gameSteps.win:
         nextImageScale = 0.7;
@@ -288,13 +315,31 @@ class Game extends Component {
           }]}
         >
           <Animated.View
+            style={[styles.buttonWrapper, {
+              opacity: this.buttonOpacity,
+            }]}
+          >
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.handleNextQuestion()}
+            >
+              <Image
+                source={Images.Next}
+              />
+            </TouchableOpacity>
+          </Animated.View>
+          <Animated.View
             style={[styles.input, {
               opacity: this.inputOpacity,
+              transform: [{
+                translateX: this.inputPosition,
+              }],
             }]}
           >
             <TextInput
               style={[styles.inputText, {
                 fontSize: this.state.inputFontSize,
+
               }]}
               onChangeText={(answer) => {
                 this.setState({
@@ -320,23 +365,12 @@ class Game extends Component {
               }}
             />
             <View
-              style={styles.inputBottom}
+              style={[styles.inputBottom, {
+                backgroundColor: this.state.bottomInputColor,
+              }]}
             />
           </Animated.View>
-          <Animated.View
-            style={[styles.buttonWrapper, {
-              opacity: this.buttonOpacity,
-            }]}
-          >
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.handleNextQuestion()}
-            >
-              <Image
-                source={Images.Next}
-              />
-            </TouchableOpacity>
-          </Animated.View>
+
         </View>
         <View
           style={{

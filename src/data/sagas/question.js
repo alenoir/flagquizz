@@ -13,6 +13,7 @@ function* handleQuestionRequest() {
   const state = yield select();
   const flagState = state.flag;
   const questionState = state.question;
+  console.log('flagState', flagState);
 
   const filteredFlags = flagState.get('list').filter((flag) => {
     const alreadyAnswered = questionState.get('answered').filter((question) => (question.get('flag').get('alpha2Code') === flag.get('alpha2Code'))).size;
@@ -39,7 +40,8 @@ function* handleQuestionAnswerRequest(action) {
 
   console.log('answers', answers, action.payload.answer);
 
-  yield put(questionAnswerSuccess());
+  yield put(questionAnswerError());
+  // yield put(questionAnswerSuccess());
 }
 
 function* watchQuestionRequest() {

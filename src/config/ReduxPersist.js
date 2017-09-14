@@ -3,12 +3,11 @@ import { AsyncStorage } from 'react-native';
 
 const REDUX_PERSIST = {
   active: true,
-  reducerVersion: '1',
+  reducerVersion: '5',
   storeConfig: {
     storage: AsyncStorage,
     blacklist: [],
-    whitelist: [],
-    transforms: [],
+    whitelist: ['question', 'flag'],
   },
 };
 

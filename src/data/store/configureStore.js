@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { autoRehydrate } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import Immutable from 'immutable';
+import Immutable, { fromJS } from 'immutable';
 import R from 'ramda';
 import devTools from 'remote-redux-devtools';
 
@@ -50,7 +50,6 @@ export default (persistConfig, customMiddleware) => {
   enhancers.push(devTools({
     name: Platform.OS,
   }));
-
   const store = createStore(rootReducer, compose(...enhancers));
 
   if (persistConfig.active) {
@@ -61,7 +60,7 @@ export default (persistConfig, customMiddleware) => {
 
   if (module.hot) {
     module.hot.accept(() => {
-      const nextRootReducer = require('../reducers/index').default; // eslint-disable-line
+        const nextRootReducer = require('../reducers/index').default; // eslint-disable-line
       store.replaceReducer(nextRootReducer);
     });
   }

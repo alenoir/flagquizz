@@ -1,24 +1,16 @@
-import { persistStore } from 'redux-persist';
+import { persistStore, createTransform } from 'redux-persist';
 import { startupRequest } from '../actions/app';
+import immutableTransform from 'redux-persist-transform-immutable';
 
 const updateReducers = (store: Object, persistConfig) => {
   const reducerVersion = persistConfig.reducerVersion;
   const config = persistConfig.storeConfig;
   const startup = (error, data) => store.dispatch(startupRequest(data));
 
+  config.transforms = [immutableTransform()];
   // Check to ensure latest reducer version
   persistConfig.storeConfig.storage.getItem('reducerVersion').then((localVersion) => {
     if (localVersion !== reducerVersion) {
-      console.tron.display({
-        name: 'PURGE',
-        value: {
-          'Old Version:': localVersion,
-          'New Version:': reducerVersion,
-        },
-        preview: 'Reducer Version Change Detected',
-        important: true,
-      });
-
       // Purge store
       persistStore(store, config, startup).purge();
       persistConfig.storeConfig.storage.setItem('reducerVersion', reducerVersion);

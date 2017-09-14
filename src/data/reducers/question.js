@@ -33,14 +33,14 @@ export default function question(state = initialState, action) {
       });
     case QUESTION_ANSWER_REQUEST:
       return state.merge({
-        loading: true,
+        loading: false,
         errored: false,
         succeded: false,
       });
     case QUESTION_ANSWER_ERROR:
       return state.merge({
         loading: false,
-        errored: true,
+        errored: new Date(),
         succeded: false,
       });
     case QUESTION_ANSWER_SUCCESS:
