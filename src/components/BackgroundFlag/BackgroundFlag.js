@@ -11,15 +11,15 @@ import styles from './styles.js';
 
 export default class BackgroundFlag extends Component {
   static propTypes = {
-    images: PropTypes.array,
+    images: PropTypes.any,
     duration: PropTypes.number,
     delay: PropTypes.number,
   }
 
   static defaultProps = {
     images: [],
-    duration: 3000,
-    delay: 6000,
+    duration: 1000,
+    delay: 3000,
   };
 
   constructor() {
@@ -31,39 +31,46 @@ export default class BackgroundFlag extends Component {
     this.state = {
       image1: null,
       image2: null,
-      currentImage: 1,
+      currentImage: 0,
     };
   }
 
   componentDidMount() {
-    this.changeImage();
+    this.changeImage(this.props.images);
   }
 
-  changeImage = () => {
-    const { images } = this.props;
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps.images !== this.props.images);
+    if (nextProps.images !== this.props.images) {
+      this.changeImage(nextProps.images);
+    }
+  }
 
-    if (!this.state.image1) {
+  changeImage = (images) => {
+    const imageArray = Array.isArray(images) ? images : [images];
+    const currentImage = this.state.currentImage;
+
+    console.log('111111', currentImage);
+
+    if (currentImage === 1) {
       this.setState({
-        image1: images[Math.floor(Math.random() * images.length)],
-        image2: images[Math.floor(Math.random() * images.length)],
-        currentImage: 1,
-      });
-    } else if (this.state.currentImage === 1) {
-      this.setState({
-        image2: images[Math.floor(Math.random() * images.length)],
+        image2: imageArray[Math.floor(Math.random() * imageArray.length)],
         currentImage: 2,
       });
-    } else if (this.state.currentImage === 2) {
+    } else {
       this.setState({
-        image1: images[Math.floor(Math.random() * images.length)],
+        image1: imageArray[Math.floor(Math.random() * imageArray.length)],
         currentImage: 1,
       });
     }
+
+    console.log('22222', currentImage);
+
     Animated.parallel([
       Animated.timing(
         this.opacity1,
         {
-          toValue: this.state.currentImage === 1 ? 1 : 0,
+          toValue: currentImage === 1 ? 0 : 1,
           duration: this.props.duration,
           easing: Easing.linear,
           delay: 0,
@@ -73,14 +80,16 @@ export default class BackgroundFlag extends Component {
       Animated.timing(
         this.opacity2,
         {
-          toValue: this.state.currentImage === 2 ? 1 : 0,
+          toValue: currentImage !== 1 ? 0 : 1,
           duration: this.props.duration,
           easing: Easing.linear,
           delay: 0,
         },
       ),
     ]).start(() => {
-      setTimeout(() => { this.changeImage(); }, this.props.delay);
+      if (images.length > 1) {
+        setTimeout(() => { this.changeImage(images); }, this.props.delay);
+      }
     });
   }
 

@@ -2,8 +2,11 @@ import { put, takeLatest, fork, select } from 'redux-saga/effects';
 
 import {
   QUESTION_REQUEST,
+  QUESTION_ANSWER_REQUEST,
 
   questionSuccess,
+  questionAnswerError,
+  questionAnswerSuccess,
 } from '../actions/question';
 
 function* handleQuestionRequest() {
@@ -27,13 +30,30 @@ function* handleQuestionRequest() {
   yield put(questionSuccess({ question }));
 }
 
+function* handleQuestionAnswerRequest(action) {
+  const state = yield select();
+  const questionState = state.question;
+
+  const currentQuestion = questionState.get('current');
+  const answers = currentQuestion.get('flag').get('translations');
+
+  console.log('answers', answers, action.payload.answer);
+
+  yield put(questionAnswerSuccess());
+}
+
 function* watchQuestionRequest() {
   yield takeLatest(QUESTION_REQUEST, handleQuestionRequest);
+}
+
+function* watchQuestionAnswerRequest() {
+  yield takeLatest(QUESTION_ANSWER_REQUEST, handleQuestionAnswerRequest);
 }
 
 
 export default function* rootSaga() {
   yield [
     fork(watchQuestionRequest),
+    fork(watchQuestionAnswerRequest),
   ];
 }

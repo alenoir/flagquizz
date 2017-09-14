@@ -22,23 +22,70 @@ export default StyleSheet.create({
   },
 
   flag: {
-    flex: 1,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 0,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   flagImage: {
-    flex: 1,
-    width: null,
-    height: null,
+
+  },
+  wrapperBadge: {
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
   },
 
+  wraperCountry: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  countryname: {
+    fontFamily: Fonts.Brandon,
+    fontWeight: 'bold',
+    fontSize: 22,
+    color: Colors.white,
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+  },
+
+  action: {
+    justifyContent: 'center',
+    height: 90,
+  },
   input: {
-    flex: 1,
+  },
+  inputText: {
+    fontFamily: Fonts.Brandon,
+    fontWeight: 'bold',
+    fontSize: 36,
+    color: Colors.white,
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    marginRight: 20,
+    marginLeft: 20,
+  },
+  inputBottom: {
+    borderRadius: 2.5,
+    backgroundColor: Colors.white,
+    height: 5,
+    marginRight: 60,
+    marginLeft: 60,
+    opacity: 0.3,
   },
 
-  fakeKeyboard: {
-    flex: 1,
+  buttonWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

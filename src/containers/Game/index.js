@@ -5,6 +5,11 @@ import {
   View,
   TouchableOpacity,
   Image,
+  TextInput,
+  Keyboard,
+  Dimensions,
+  Animated,
+  Easing,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,54 +17,217 @@ import { injectIntl } from 'react-intl';
 
 import FlagImages from '../../assets/flags';
 import BackgroundFlag from '../../components/BackgroundFlag';
+import Badge from '../../components/Badge';
 import Score from '../../components/Score';
 import QuestionActions from '../../data/actions/question';
 
 import translations from './translations.js';
 import styles from './styles.js';
-import { Images } from '../../theme';
+import { Images, Colors } from '../../theme';
+
+const gameSteps = {
+  loading: 'GAME_STEP_LOADING',
+  playing: 'GAME_STEP_PLAYING',
+  errored: 'GAME_STEP_ERRORED',
+  win: 'GAME_STEP_WIN',
+};
 
 class Game extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     intl: PropTypes.object.isRequired,
-    question: PropTypes.object.isRequired,
+    question: PropTypes.object,
     flags: PropTypes.object.isRequired,
     questionActions: PropTypes.object.isRequired,
   };
 
-  constructor() {
-    super();
+  static defaultProps = {
+    question: null,
+  }
 
+  constructor(props) {
+    super(props);
+
+    const { width } = Dimensions.get('window');
+
+    this.imageScale = new Animated.Value(1);
+    this.inputOpacity = new Animated.Value(1);
+    this.buttonOpacity = new Animated.Value(0);
+    this.nameOpacity = new Animated.Value(0);
+    this.badgeScale = new Animated.Value(0);
+
+    const currentQuestion = props.question.get('current');
+    let currentFlagImage = null;
+    if (currentQuestion) {
+      currentFlagImage = FlagImages[currentQuestion.get('flag').get('alpha2Code').toLowerCase()];
+    }
     this.state = {
+      step: gameSteps.loading,
       flag: null,
+      answer: '',
+      keyboardHeight: 200,
+      imageWidth: width - 20,
+      imageHeight: width * (2 / 3),
+      currentFlagImage,
+      inputFontSize: 36,
     };
   }
+  //
+  // componentWillMount() {
+  //   this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+  //   this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+  // }
 
   componentDidMount() {
     const { question } = this.props;
 
-    if (!question) {
+    if (!question.get('current')) {
       this.props.questionActions.questionRequest();
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextState = {};
+    if (nextProps.question.get('loading') !== this.props.question.get('loading') && nextProps.question.get('loading')) {
+      nextState.step = gameSteps.loading;
+    } else if (nextProps.question.get('errored') !== this.props.question.get('errored') && nextProps.question.get('errored')) {
+      nextState.step = gameSteps.errored;
+      nextState.answer = '';
+    } else if (nextProps.question.get('succeded') !== this.props.question.get('succeded') && nextProps.question.get('succeded')) {
+      nextState.step = gameSteps.win;
+      nextState.answer = '';
+    } else {
+      nextState.step = gameSteps.playing;
+      if (this.input) {
+        this.input.focus();
+      }
+    }
+
+    const currentQuestion = nextProps.question.get('current');
+    if (currentQuestion) {
+      nextState.currentFlagImage = FlagImages[currentQuestion.get('flag').get('alpha2Code').toLowerCase()];
+    }
+
+    this.setState(nextState);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.step !== this.state.step) {
+      this.changeStep(this.state.step);
+    }
+  }
+
+  changeStep = (step) => {
+    let nextImageScale = 1;
+    let nextInputOpacity = 1;
+    let nextButtonOpacity = 0;
+    let nextNameOpacity = 0;
+    let nextBadgeScale = 0;
+
+    switch (step) {
+      case gameSteps.errored:
+        nextImageScale = 1;
+        nextInputOpacity = 1;
+        nextButtonOpacity = 0;
+        nextNameOpacity = 0;
+        nextBadgeScale = 0;
+        break;
+      case gameSteps.win:
+        nextImageScale = 0.7;
+        nextInputOpacity = 0;
+        nextButtonOpacity = 1;
+        nextNameOpacity = 1;
+        nextBadgeScale = 1;
+        break;
+      default:
+        this.nameOpacity.setValue(0);
+        nextImageScale = 1;
+        nextInputOpacity = 1;
+        nextButtonOpacity = 0;
+        nextNameOpacity = 0;
+        nextBadgeScale = 0;
+        break;
+    }
+
+    Animated.parallel([
+      Animated.spring(
+        this.imageScale,
+        {
+          toValue: nextImageScale,
+          duration: 500,
+        },
+      ),
+      Animated.timing(
+        this.inputOpacity,
+        {
+          toValue: nextInputOpacity,
+          duration: 500,
+        },
+      ),
+      Animated.timing(
+        this.buttonOpacity,
+        {
+          toValue: nextButtonOpacity,
+          duration: nextButtonOpacity ? 500 : 200,
+        },
+      ),
+      Animated.timing(
+        this.nameOpacity,
+        {
+          toValue: nextNameOpacity,
+          duration: 500,
+        },
+      ),
+      Animated.spring(
+        this.badgeScale,
+        {
+          toValue: nextBadgeScale,
+          duration: 500,
+          delay: nextBadgeScale ? 200 : 0,
+        },
+      ),
+    ]).start();
+  }
+  //
+  // componentWillUnmount() {
+  //   this.keyboardDidShowListener.remove();
+  //   this.keyboardDidHideListener.remove();
+  // }
+  //
+  // keyboardDidShow = (e) => {
+  //   this.setState({
+  //     keyboardHeight: e.endCoordinates.height,
+  //   });
+  // }
+  //
+  // keyboardDidHide = (e) => {
+  //   this.setState({
+  //     keyboardHeight: e.endCoordinates.height,
+  //   });
+  // }
+
+  handleNextQuestion = () => {
+    console.log('handleNextQuestion');
+    this.props.questionActions.questionRequest();
   }
 
 
   render() {
     const { question } = this.props;
-    console.log('question', question);
-    if (!question) {
+    const { step } = this.state;
+    console.log('step', step);
+    if (step === gameSteps.loading) {
       return <Text>Loading</Text>;
     }
 
-    const currentFlagImage = FlagImages[question.get('flag').get('alpha2Code').toLowerCase()];
+    const currentQuestion = question.get('current');
 
     return (
       <View
         style={styles.container}
       >
         <BackgroundFlag
-          images={[currentFlagImage]}
+          images={this.state.currentFlagImage}
         />
         <View
           style={styles.header}
@@ -80,28 +248,100 @@ class Game extends Component {
           />
         </View>
         <View
-          style={styles.flag}
+          style={[styles.flag, {
+            height: this.state.imageHeight,
+            width: this.state.imageWidth,
+          }]}
         >
-          <Image
-            style={styles.flagImage}
-            source={currentFlagImage}
-            resizeMode={'cover'}
+          <Animated.Image
+            style={[styles.flagImage, {
+              transform: [{ scale: this.imageScale }],
+              height: this.state.imageHeight,
+              width: this.state.imageWidth,
+            }]}
+            source={this.state.currentFlagImage}
+            resizeMode="contain"
           />
-        </View>
-        <View
-          style={styles.input}
-        >
-          <TouchableOpacity
-            style={styles.buttonPlay}
-            onPress={() => this.props.navigation.goBack()}
+          <Animated.View
+            style={[styles.wrapperBadge, {
+              transform: [{ scale: this.badgeScale }],
+            }]}
           >
-            <Image
-              source={Images.Back}
+            <Badge
+              label="+1"
             />
-          </TouchableOpacity>
+          </Animated.View>
+          <Animated.View
+            style={[styles.wraperCountry, {
+              opacity: this.nameOpacity,
+            }]}
+          >
+            <Text
+              style={styles.countryname}
+            >
+              {currentQuestion.get('flag').get('translations').get('fr') /* @TODO: mput translated name */}
+            </Text>
+          </Animated.View>
         </View>
         <View
-          style={styles.fakeKeyboard}
+          style={[styles.action, {
+          }]}
+        >
+          <Animated.View
+            style={[styles.input, {
+              opacity: this.inputOpacity,
+            }]}
+          >
+            <TextInput
+              style={[styles.inputText, {
+                fontSize: this.state.inputFontSize,
+              }]}
+              onChangeText={(answer) => {
+                this.setState({
+                  answer: answer.toUpperCase(),
+                });
+              }}
+              value={this.state.answer}
+              autoCorrect={false}
+              keyboardType={'default'}
+              returnKeyType={'done'}
+              autoFocus
+              caretHidden
+              tintColor={Colors.white}
+              selectionColor={Colors.white}
+              ref={(ref) => {
+                if (ref) {
+                  this.input = ref;
+                }
+              }}
+              blurOnSubmit
+              onSubmitEditing={() => {
+                this.props.questionActions.questionAnswerRequest({ answer: this.state.answer });
+              }}
+            />
+            <View
+              style={styles.inputBottom}
+            />
+          </Animated.View>
+          <Animated.View
+            style={[styles.buttonWrapper, {
+              opacity: this.buttonOpacity,
+            }]}
+          >
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.handleNextQuestion()}
+            >
+              <Image
+                source={Images.Next}
+              />
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
+        <View
+          style={{
+            height: this.state.keyboardHeight,
+          }}
         />
 
       </View>
@@ -111,7 +351,7 @@ class Game extends Component {
 
 const mapStateToProps = (state) => ({
   flags: state.flag.get('list'),
-  question: state.question.get('current'),
+  question: state.question,
 });
 
 const mapDispatchToProps = (dispatch) => ({
