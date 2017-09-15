@@ -1,4 +1,6 @@
 import { put, takeLatest, fork, select } from 'redux-saga/effects';
+import { List, fromJS } from 'immutable';
+import Fuse from 'fuse.js';
 
 import {
   QUESTION_REQUEST,
@@ -24,9 +26,11 @@ function* handleQuestionRequest() {
 
   console.log('filteredFlags', filteredFlags);
   const nextFlag = filteredFlags.get(Math.floor(Math.random() * filteredFlags.size));
+
   const question = {
     startTime: new Date(),
     flag: nextFlag,
+    answers: [],
   };
   yield put(questionSuccess({ question }));
 }
@@ -34,14 +38,43 @@ function* handleQuestionRequest() {
 function* handleQuestionAnswerRequest(action) {
   const state = yield select();
   const questionState = state.question;
+  let valid = false;
+  let currentQuestion = questionState.get('current');
 
-  const currentQuestion = questionState.get('current');
-  const answers = currentQuestion.get('flag').get('translations');
+  const answerObject = {
+    answer: action.payload.answer,
+  };
+  const options = {
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 10,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    includeScore: true,
+    includeMatches: true,
+    keys: ['translations', 'name', 'nativeName', 'demonym'],
+  };
+  const fuzzySearch = new Fuse([currentQuestion.get('flag').toJS()], options);
+  const fuzzyResult = fuzzySearch.search(action.payload.answer);
 
-  console.log('answers', answers, action.payload.answer);
+  console.log('fuzzyResult', fuzzyResult, fuzzySearch);
 
-  yield put(questionAnswerError());
-  // yield put(questionAnswerSuccess());
+  answerObject.fuzzyResult = fuzzyResult;
+
+  console.log('answerObject', answerObject);
+  currentQuestion = currentQuestion.set('answers', currentQuestion.get('answers') || List());
+  currentQuestion = currentQuestion.set('answers', currentQuestion.get('answers').push(fromJS(answerObject)));
+  currentQuestion = currentQuestion.set('answerTime', new Date());
+
+  if (fuzzyResult[0] && fuzzyResult[0].matches.length > 0) {
+    valid = true;
+  }
+  if (valid) {
+    yield put(questionAnswerSuccess({ question: currentQuestion }));
+  } else {
+    yield put(questionAnswerError({ question: currentQuestion }));
+  }
 }
 
 function* watchQuestionRequest() {

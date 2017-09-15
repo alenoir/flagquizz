@@ -6,6 +6,7 @@ import {
 
 const initialState = Map({
   list: List(),
+  count: 0,
 });
 
 export default function flag(state = initialState, action) {
@@ -19,6 +20,7 @@ export default function flag(state = initialState, action) {
       return state.merge({
         loading: false,
         list: fromJS(payload.flags),
+        count: payload.flags.length,
       });
     default:
       return state;

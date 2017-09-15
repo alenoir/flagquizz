@@ -1,4 +1,4 @@
-import { Map, List, fromJS } from 'immutable';
+import { Map, fromJS } from 'immutable';
 import {
   QUESTION_REQUEST,
   QUESTION_SUCCESS,
@@ -12,7 +12,8 @@ const initialState = Map({
   errored: false,
   succeded: false,
   current: null,
-  answered: List(),
+  answered: Map(),
+  answeredCount: 0,
 });
 
 export default function question(state = initialState, action) {
@@ -42,12 +43,16 @@ export default function question(state = initialState, action) {
         loading: false,
         errored: new Date(),
         succeded: false,
+        current: payload.question,
       });
     case QUESTION_ANSWER_SUCCESS:
+      const answered = state.get('answered').set(payload.question.get('flag').get('alpha2Code'), payload.question);
       return state.merge({
+        answered,
         loading: false,
         errored: false,
-        succeded: true,
+        succeded: new Date(),
+        answeredCount: answered.size,
       });
     default:
       return state;

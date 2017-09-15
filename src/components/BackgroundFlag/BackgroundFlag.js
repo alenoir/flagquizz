@@ -18,8 +18,8 @@ export default class BackgroundFlag extends Component {
 
   static defaultProps = {
     images: [],
-    duration: 1000,
-    delay: 3000,
+    duration: 3000,
+    delay: 6000,
   };
 
   constructor() {

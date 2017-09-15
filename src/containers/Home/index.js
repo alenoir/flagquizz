@@ -20,10 +20,12 @@ class Home extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     intl: PropTypes.object.isRequired,
+    answeredCount: PropTypes.number.isRequired,
+    flagCount: PropTypes.number.isRequired,
   };
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, answeredCount, flagCount } = this.props;
     const { navigate } = navigation;
 
     return (
@@ -62,8 +64,8 @@ class Home extends Component {
                 {this.props.intl.formatMessage(translations.homeSubtitle).toUpperCase()}
               </Text>
               <Score
-                winNumber={22}
-                totalNumber={250}
+                winNumber={answeredCount}
+                totalNumber={flagCount}
               />
             </View>
 
@@ -93,8 +95,9 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = (state) => ({
+  flagCount: state.flag.get('count'),
+  answeredCount: state.question.get('answeredCount'),
 });
 
 const mapDispatchToProps = () => ({

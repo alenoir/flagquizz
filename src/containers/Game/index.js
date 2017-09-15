@@ -39,6 +39,8 @@ class Game extends Component {
     question: PropTypes.object,
     flags: PropTypes.object.isRequired,
     questionActions: PropTypes.object.isRequired,
+    answeredCount: PropTypes.number.isRequired,
+    flagCount: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -82,14 +84,13 @@ class Game extends Component {
 
   componentDidMount() {
     const { question } = this.props;
-    console.log('componentDidMount', question.get('current'));
     if (!question.get('current')) {
       this.props.questionActions.questionRequest();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('++++ componentWillReceiveProps', nextProps.question.get('errored'));
+    console.log('++++++++', nextProps.question.get('succeded'), nextProps.question.get('succeded') !== this.props.question.get('succeded'));
     const nextState = {};
     if (nextProps.question.get('loading') !== this.props.question.get('loading') && nextProps.question.get('loading')) {
       nextState.step = gameSteps.loading;
@@ -240,7 +241,7 @@ class Game extends Component {
 
 
   render() {
-    const { question } = this.props;
+    const { question, answeredCount, flagCount } = this.props;
     const { step } = this.state;
     console.log('step', step);
     if (step === gameSteps.loading) {
@@ -270,8 +271,8 @@ class Game extends Component {
 
           <Score
             style={styles.score}
-            winNumber={22}
-            totalNumber={250}
+            winNumber={answeredCount}
+            totalNumber={flagCount}
           />
         </View>
         <View
@@ -333,6 +334,13 @@ class Game extends Component {
               opacity: this.inputOpacity,
               transform: [{
                 translateX: this.inputPosition,
+
+              },
+              {
+                translateY: this.inputOpacity.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [50, 0],
+                }),
               }],
             }]}
           >
@@ -386,6 +394,8 @@ class Game extends Component {
 const mapStateToProps = (state) => ({
   flags: state.flag.get('list'),
   question: state.question,
+  flagCount: state.flag.get('count'),
+  answeredCount: state.question.get('answeredCount'),
 });
 
 const mapDispatchToProps = (dispatch) => ({

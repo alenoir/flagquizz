@@ -12,7 +12,7 @@ import {
 
 function* handleFlagsRequest() {
   const flags = yield call(fetchFlags);
-  console.log('handleFlagsRequest', flags);
+
   yield put(flagsSuccess({ flags }));
 }
 
