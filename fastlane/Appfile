@@ -1,0 +1,3 @@
+apple_id "antoine.alenoir@gmail.com"
+
+ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "oxxv-bvsj-kecd-uapq"

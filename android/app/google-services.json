@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "712404641002",
+    "firebase_url": "https://flag-quiz-4ce7b.firebaseio.com",
+    "project_id": "flag-quiz-4ce7b",
+    "storage_bucket": "flag-quiz-4ce7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712404641002:android:35f916550ef6dc21",
+        "android_client_info": {
+          "package_name": "com.alenoir.flagcontest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712404641002-i5o66o9bd7n2dssuot7hodhh6o1p056m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0szFf6CQoYljKk65nfuLZEXl7-TSsOxw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

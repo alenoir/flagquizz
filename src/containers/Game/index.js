@@ -58,6 +58,7 @@ class Game extends Component {
     this.buttonOpacity = new Animated.Value(0);
     this.nameOpacity = new Animated.Value(0);
     this.badgeScale = new Animated.Value(0);
+    this.keyboardHeight = new Animated.Value(0);
 
     const currentQuestion = props.question.get('current');
     let currentFlagImage = null;
@@ -68,7 +69,6 @@ class Game extends Component {
       step: currentQuestion ? gameSteps.playing : gameSteps.loading,
       flag: null,
       answer: '',
-      keyboardHeight: 200,
       imageWidth: width - 20,
       imageHeight: width * (2 / 3),
       currentFlagImage,
@@ -76,13 +76,11 @@ class Game extends Component {
       bottomInputColor: Colors.white,
     };
   }
-  //
-  // componentWillMount() {
-  //   this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
-  //   this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
-  // }
 
-  componentDidMount() {
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+
     const { question } = this.props;
     if (!question.get('current')) {
       this.props.questionActions.questionRequest();
@@ -216,34 +214,45 @@ class Game extends Component {
       ),
     ]).start();
   }
-  //
-  // componentWillUnmount() {
-  //   this.keyboardDidShowListener.remove();
-  //   this.keyboardDidHideListener.remove();
-  // }
-  //
-  // keyboardDidShow = (e) => {
-  //   this.setState({
-  //     keyboardHeight: e.endCoordinates.height,
-  //   });
-  // }
-  //
-  // keyboardDidHide = (e) => {
-  //   this.setState({
-  //     keyboardHeight: e.endCoordinates.height,
-  //   });
-  // }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  keyboardWillShow = (e) => {
+    Animated.timing(
+      this.keyboardHeight,
+      {
+        toValue: e.endCoordinates.height,
+        duration: e.duration,
+        easing: Easing.inOut(Easing.ease),
+      },
+    ).start();
+  }
+
+  keyboardWillHide = (e) => {
+    Animated.timing(
+      this.keyboardHeight,
+      {
+        toValue: e.endCoordinates.height,
+        duration: e.duration,
+        easing: Easing.inOut(Easing.ease),
+      },
+    ).start();
+  }
 
   handleNextQuestion = () => {
-    console.log('handleNextQuestion');
-    this.props.questionActions.questionRequest();
+    console.log('handleNextQuestion', this.state.step);
+    if (this.state.step === gameSteps.win) {
+      this.props.questionActions.questionRequest();
+    }
   }
 
 
   render() {
     const { question, answeredCount, flagCount } = this.props;
     const { step } = this.state;
-    console.log('step', step);
     if (step === gameSteps.loading) {
       return <Text>Loading</Text>;
     }
@@ -277,8 +286,7 @@ class Game extends Component {
         </View>
         <View
           style={[styles.flag, {
-            height: this.state.imageHeight,
-            width: this.state.imageWidth,
+
           }]}
         >
           <Animated.Image
@@ -315,20 +323,7 @@ class Game extends Component {
           style={[styles.action, {
           }]}
         >
-          <Animated.View
-            style={[styles.buttonWrapper, {
-              opacity: this.buttonOpacity,
-            }]}
-          >
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.handleNextQuestion()}
-            >
-              <Image
-                source={Images.Next}
-              />
-            </TouchableOpacity>
-          </Animated.View>
+
           <Animated.View
             style={[styles.input, {
               opacity: this.inputOpacity,
@@ -347,15 +342,16 @@ class Game extends Component {
             <TextInput
               style={[styles.inputText, {
                 fontSize: this.state.inputFontSize,
-
               }]}
               onChangeText={(answer) => {
                 this.setState({
                   answer: answer.toUpperCase(),
                 });
               }}
+              underlineColorAndroid={'transparent'}
               value={this.state.answer}
               autoCorrect={false}
+              autoComplete={false}
               keyboardType={'default'}
               returnKeyType={'done'}
               autoFocus
@@ -368,21 +364,39 @@ class Game extends Component {
                 }
               }}
               blurOnSubmit
+              autoCapitalize={'characters'}
               onSubmitEditing={() => {
                 this.props.questionActions.questionAnswerRequest({ answer: this.state.answer });
+                setTimeout(() => {
+                  this.input.focus();
+                }, 10);
               }}
             />
             <View
               style={[styles.inputBottom, {
                 backgroundColor: this.state.bottomInputColor,
+                width: this.state.imageWidth * 0.8,
               }]}
             />
           </Animated.View>
-
+          <Animated.View
+            style={[styles.buttonWrapper, {
+              opacity: this.buttonOpacity,
+            }]}
+          >
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.handleNextQuestion()}
+            >
+              <Image
+                source={Images.Next}
+              />
+            </TouchableOpacity>
+          </Animated.View>
         </View>
-        <View
+        <Animated.View
           style={{
-            height: this.state.keyboardHeight,
+            height: this.keyboardHeight,
           }}
         />
 

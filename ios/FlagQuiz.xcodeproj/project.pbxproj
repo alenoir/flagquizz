@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -39,8 +38,11 @@
 		686F9919872D40B49017CB0F /* Brandon_blk_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DBADBB25694221B3A93BC2 /* Brandon_blk_it.otf */; };
 		80F9E678D0F64FD9A5A00C47 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A571EF33D8D445B8FC8673A /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		928FF88D4D77E896EA0B667B /* libPods-FlagQuiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E061334ABC5C8528797FE1DA /* libPods-FlagQuiz.a */; };
 		97EA2285778E44CFBAF29834 /* Brandon_reg_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA5CF3F6C44635919334D7 /* Brandon_reg_it.otf */; };
+		A1F62EFC1F6BDAAE00B3B7E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1F62EFB1F6BDA4600B3B7E2 /* GoogleService-Info.plist */; };
 		A7682F30FE814333AC7D2C53 /* Brandon_reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB56FA35D042406EAFDF5CD2 /* Brandon_reg.otf */; };
+		AC7127DBD3594B89BAD57B29 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 618413A3EC554BA489A98149 /* libRNFirebase.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		ADE7E0356B0042BC8F099A8A /* Brandon_med_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = E503BCC499E045C4B8A8231B /* Brandon_med_it.otf */; };
 		AEC41842B6E1456B99777DAA /* Brandon_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E99EBEB019C7466BAE714688 /* Brandon_light.otf */; };
@@ -306,6 +308,13 @@
 			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
 			remoteInfo = "double-conversion-tvOS";
 		};
+		A1F62EF91F6BD86700B3B7E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 721E3AE9667B470FA2186F7C /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -340,22 +349,29 @@
 		255AA99E4B0B477E902E7E7D /* Brandon_blk.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_blk.otf; path = ../src/assets/fonts/Brandon_blk.otf; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FlagQuiz-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlagQuiz-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FlagQuiz-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FlagQuiz-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30071D0864A58D6301015355 /* Pods-FlagQuiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlagQuiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlagQuiz/Pods-FlagQuiz.debug.xcconfig"; sourceTree = "<group>"; };
 		3FFA5CF3F6C44635919334D7 /* Brandon_reg_it.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_reg_it.otf; path = ../src/assets/fonts/Brandon_reg_it.otf; sourceTree = "<group>"; };
 		48B655A6251E4473BC1AE2F6 /* Brandon_thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_thin.otf; path = ../src/assets/fonts/Brandon_thin.otf; sourceTree = "<group>"; };
 		4E990A77081849148CE40041 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		54A7270FB9934096A1A2E6B2 /* Brandon_bld.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_bld.otf; path = ../src/assets/fonts/Brandon_bld.otf; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		618413A3EC554BA489A98149 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
+		721E3AE9667B470FA2186F7C /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7C0149F974DB4FD48050B61A /* libRNBlur.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBlur.a; sourceTree = "<group>"; };
 		80B7FFF6510743D5BACCED3A /* Brandon_med.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_med.otf; path = ../src/assets/fonts/Brandon_med.otf; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		A193F0AE1F6BD30100A9D9D9 /* FlagQuiz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FlagQuiz.entitlements; path = FlagQuiz/FlagQuiz.entitlements; sourceTree = "<group>"; };
+		A1F62EFB1F6BDA4600B3B7E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A40ECD150A6B405AB2263D96 /* Brandon_thin_it.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_thin_it.otf; path = ../src/assets/fonts/Brandon_thin_it.otf; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		CB56FA35D042406EAFDF5CD2 /* Brandon_reg.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_reg.otf; path = ../src/assets/fonts/Brandon_reg.otf; sourceTree = "<group>"; };
 		D71A3C507420459C8B49F57A /* Brandon_light_it.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_light_it.otf; path = ../src/assets/fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
+		E061334ABC5C8528797FE1DA /* libPods-FlagQuiz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlagQuiz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E503BCC499E045C4B8A8231B /* Brandon_med_it.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_med_it.otf; path = ../src/assets/fonts/Brandon_med_it.otf; sourceTree = "<group>"; };
 		E8DBADBB25694221B3A93BC2 /* Brandon_blk_it.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_blk_it.otf; path = ../src/assets/fonts/Brandon_blk_it.otf; sourceTree = "<group>"; };
 		E99EBEB019C7466BAE714688 /* Brandon_light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_light.otf; path = ../src/assets/fonts/Brandon_light.otf; sourceTree = "<group>"; };
+		F00EDD63F101FF06A5607DE9 /* Pods-FlagQuiz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlagQuiz.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlagQuiz/Pods-FlagQuiz.release.xcconfig"; sourceTree = "<group>"; };
 		F4507D2E779B4F1ABED8101D /* Brandon_bld_it.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_bld_it.otf; path = ../src/assets/fonts/Brandon_bld_it.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -387,6 +403,8 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				B66C6FF74D1846BD90D8F40B /* libRNBlur.a in Frameworks */,
 				80F9E678D0F64FD9A5A00C47 /* libRNSVG.a in Frameworks */,
+				928FF88D4D77E896EA0B667B /* libPods-FlagQuiz.a in Frameworks */,
+				AC7127DBD3594B89BAD57B29 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +492,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		03B411B147CDF8F8C8D83DD3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				30071D0864A58D6301015355 /* Pods-FlagQuiz.debug.xcconfig */,
+				F00EDD63F101FF06A5607DE9 /* Pods-FlagQuiz.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +508,14 @@
 				3DAD3E901DF850E9000B6D8A /* libRCTSettings-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		13979E851FBBB31F0AAD4E11 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E061334ABC5C8528797FE1DA /* libPods-FlagQuiz.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		139FDEE71B06529A00C62182 /* Products */ = {
@@ -495,6 +530,7 @@
 		13B07FAE1A68108700A75B9A /* FlagQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				A193F0AE1F6BD30100A9D9D9 /* FlagQuiz.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -560,6 +596,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				21B0028555AA4165A647F35E /* RNBlur.xcodeproj */,
 				4E990A77081849148CE40041 /* RNSVG.xcodeproj */,
+				721E3AE9667B470FA2186F7C /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -582,6 +619,8 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				EE06B29363D940D2A8DB25BC /* Resources */,
 				A19304D21F6982190010015B /* Recovered References */,
+				03B411B147CDF8F8C8D83DD3 /* Pods */,
+				13979E851FBBB31F0AAD4E11 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -622,8 +661,17 @@
 			children = (
 				7C0149F974DB4FD48050B61A /* libRNBlur.a */,
 				1A571EF33D8D445B8FC8673A /* libRNSVG.a */,
+				618413A3EC554BA489A98149 /* libRNFirebase.a */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		A1F62EF61F6BD86700B3B7E2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1F62EFA1F6BD86700B3B7E2 /* libRNFirebase.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -638,6 +686,7 @@
 		EE06B29363D940D2A8DB25BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1F62EFB1F6BDA4600B3B7E2 /* GoogleService-Info.plist */,
 				F4507D2E779B4F1ABED8101D /* Brandon_bld_it.otf */,
 				54A7270FB9934096A1A2E6B2 /* Brandon_bld.otf */,
 				E8DBADBB25694221B3A93BC2 /* Brandon_blk_it.otf */,
@@ -679,10 +728,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FlagQuiz" */;
 			buildPhases = (
+				169C5822BB324FE396624F9E /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				588D2FAEE7E6EABCEDABA497 /* [CP] Embed Pods Frameworks */,
+				C9B0C1EB67AF0DF1EC255976 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -744,6 +796,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = N748PGRLNM;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -819,6 +876,10 @@
 				{
 					ProductGroup = A12CCA231F67E71000EEBA69 /* Products */;
 					ProjectRef = 21B0028555AA4165A647F35E /* RNBlur.xcodeproj */;
+				},
+				{
+					ProductGroup = A1F62EF61F6BD86700B3B7E2 /* Products */;
+					ProjectRef = 721E3AE9667B470FA2186F7C /* RNFirebase.xcodeproj */;
 				},
 				{
 					ProductGroup = A12CCA211F67E70F00EEBA69 /* Products */;
@@ -1074,6 +1135,13 @@
 			remoteRef = A12CCA8D1F67F04F00EEBA69 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A1F62EFA1F6BD86700B3B7E2 /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = A1F62EF91F6BD86700B3B7E2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1097,6 +1165,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				A1F62EFC1F6BDAAE00B3B7E2 /* GoogleService-Info.plist in Resources */,
 				B7F67822821F4BBD988D0846 /* Brandon_bld_it.otf in Resources */,
 				D5E0BB06D01744D19C5E81CC /* Brandon_bld.otf in Resources */,
 				686F9919872D40B49017CB0F /* Brandon_blk_it.otf in Resources */,
@@ -1144,6 +1213,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		169C5822BB324FE396624F9E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FlagQuiz-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1157,6 +1244,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		588D2FAEE7E6EABCEDABA497 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlagQuiz/Pods-FlagQuiz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9B0C1EB67AF0DF1EC255976 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlagQuiz/Pods-FlagQuiz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1235,11 +1352,15 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FlagQuizTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1258,11 +1379,15 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FlagQuizTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1274,15 +1399,18 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30071D0864A58D6301015355 /* Pods-FlagQuiz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = FlagQuiz/FlagQuiz.entitlements;
+				CURRENT_PROJECT_VERSION = 201709191110;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = N748PGRLNM;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FlagQuiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1291,7 +1419,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.alenoir.flagquiz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alenoir.flagcontest;
 				PRODUCT_NAME = FlagQuiz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1299,14 +1427,17 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F00EDD63F101FF06A5607DE9 /* Pods-FlagQuiz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = FlagQuiz/FlagQuiz.entitlements;
+				CURRENT_PROJECT_VERSION = 201709191110;
 				DEVELOPMENT_TEAM = N748PGRLNM;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = FlagQuiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1315,7 +1446,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.alenoir.flagquiz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alenoir.flagcontest;
 				PRODUCT_NAME = FlagQuiz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1337,10 +1468,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "FlagQuiz-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1369,10 +1504,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "FlagQuiz-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1398,7 +1537,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FlagQuiz-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FlagQuiz-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1420,7 +1562,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FlagQuiz-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FlagQuiz-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

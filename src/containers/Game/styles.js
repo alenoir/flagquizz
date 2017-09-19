@@ -9,7 +9,8 @@ export default StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: 80,
+    marginTop: 20,
+    height: 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -22,9 +23,10 @@ export default StyleSheet.create({
   },
 
   flag: {
+    flex: 2,
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 10,
+    marginTop: 0,
     marginBottom: 0,
     flexDirection: 'column',
     alignItems: 'center',
@@ -55,10 +57,14 @@ export default StyleSheet.create({
   },
 
   action: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    height: 90,
   },
   input: {
+    flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'center',
   },
   inputText: {
     fontFamily: Fonts.Brandon,

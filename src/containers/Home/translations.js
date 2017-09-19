@@ -9,7 +9,7 @@ export default defineMessages({
   },
   homeSubtitle: {
     id: 'Home.subtitle',
-    defaultMessage: 'Contest',
+    defaultMessage: 'QUIZ',
     description: 'Home.subtitle',
   },
   homeButton: {
