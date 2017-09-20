@@ -4102,6 +4102,10 @@ react-native-firebase@^2.2.0:
     bows "^1.6.0"
     prop-types "^15.5.10"
 
+react-native-maps@^0.16.4:
+  version "0.16.4"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.16.4.tgz#c18c3cab8cd0ce05431cd74dac11a39afaa579e4"
+
 react-native-svg@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-5.4.1.tgz#c46191c786adbe9d5007342b4279efd153db8839"

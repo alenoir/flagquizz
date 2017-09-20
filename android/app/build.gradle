@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-maps')
     compile project(':react-native-svg')
     compile project(':react-native-blur')
     compile fileTree(include: ['*.jar'], dir: 'libs')

@@ -8,7 +8,6 @@ import {
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: -10,
   },
   scoreLeft: {
     fontFamily: Fonts.Brandon,

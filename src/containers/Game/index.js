@@ -248,6 +248,9 @@ class Game extends Component {
     }
   }
 
+  handleSkip = () => {
+    this.props.questionActions.questionRequest();
+  }
 
   render() {
     const { question, answeredCount, flagCount } = this.props;
@@ -282,6 +285,17 @@ class Game extends Component {
             winNumber={answeredCount}
             totalNumber={flagCount}
           />
+
+          <TouchableOpacity
+            style={styles.buttonSkip}
+            onPress={this.handleSkip}
+          >
+            <Text
+              style={styles.buttonSkipText}
+            >
+              {this.props.intl.formatMessage(translations.gameButtonSkip)}
+            </Text>
+          </TouchableOpacity>
         </View>
         <View
           style={[styles.flag, {

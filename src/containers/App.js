@@ -9,6 +9,7 @@ import fr from 'react-intl/locale-data/fr';
 
 import Home from './Home';
 import Game from './Game';
+import Hint from './Hint';
 
 
 global.Intl = require('intl');
@@ -24,6 +25,12 @@ const SimpleApp = StackNavigator({
   },
   Game: {
     screen: Game,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Hint: {
+    screen: Hint,
     navigationOptions: {
       header: null,
     },

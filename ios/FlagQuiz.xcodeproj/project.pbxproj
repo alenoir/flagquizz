@@ -21,6 +21,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		2565FB8864B6475A8D75081D /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = D71A3C507420459C8B49F57A /* Brandon_light_it.otf */; };
+		4BE8D99C4D37432185641D91 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C9348580424D3CBD437A2C /* libAirMaps.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		686F9919872D40B49017CB0F /* Brandon_blk_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DBADBB25694221B3A93BC2 /* Brandon_blk_it.otf */; };
 		80F9E678D0F64FD9A5A00C47 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A571EF33D8D445B8FC8673A /* libRNSVG.a */; };
@@ -290,6 +291,13 @@
 			remoteGlobalIDString = A13678C41F714DF3008B4A5C;
 			remoteInfo = "Flag Quiz Sticker";
 		};
+		A1598A9C1F72528600AC6AAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5378F61FFCEA4CACA54530FA /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
 		A1F62EF91F6BD86700B3B7E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 721E3AE9667B470FA2186F7C /* RNFirebase.xcodeproj */;
@@ -342,8 +350,10 @@
 		255AA99E4B0B477E902E7E7D /* Brandon_blk.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_blk.otf; path = ../src/assets/fonts/Brandon_blk.otf; sourceTree = "<group>"; };
 		30071D0864A58D6301015355 /* Pods-FlagQuiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlagQuiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlagQuiz/Pods-FlagQuiz.debug.xcconfig"; sourceTree = "<group>"; };
 		3FFA5CF3F6C44635919334D7 /* Brandon_reg_it.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_reg_it.otf; path = ../src/assets/fonts/Brandon_reg_it.otf; sourceTree = "<group>"; };
+		44C9348580424D3CBD437A2C /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		48B655A6251E4473BC1AE2F6 /* Brandon_thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_thin.otf; path = ../src/assets/fonts/Brandon_thin.otf; sourceTree = "<group>"; };
 		4E990A77081849148CE40041 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
+		5378F61FFCEA4CACA54530FA /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		54A7270FB9934096A1A2E6B2 /* Brandon_bld.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Brandon_bld.otf; path = ../src/assets/fonts/Brandon_bld.otf; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		618413A3EC554BA489A98149 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
@@ -391,6 +401,7 @@
 				80F9E678D0F64FD9A5A00C47 /* libRNSVG.a in Frameworks */,
 				928FF88D4D77E896EA0B667B /* libPods-FlagQuiz.a in Frameworks */,
 				AC7127DBD3594B89BAD57B29 /* libRNFirebase.a in Frameworks */,
+				4BE8D99C4D37432185641D91 /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,6 +555,7 @@
 				21B0028555AA4165A647F35E /* RNBlur.xcodeproj */,
 				4E990A77081849148CE40041 /* RNSVG.xcodeproj */,
 				721E3AE9667B470FA2186F7C /* RNFirebase.xcodeproj */,
+				5378F61FFCEA4CACA54530FA /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -610,12 +622,21 @@
 			path = "Flag Quiz Sticker";
 			sourceTree = "<group>";
 		};
+		A1598A991F72528600AC6AAB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1598A9D1F72528600AC6AAB /* libAirMaps.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A19304D21F6982190010015B /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				7C0149F974DB4FD48050B61A /* libRNBlur.a */,
 				1A571EF33D8D445B8FC8673A /* libRNSVG.a */,
 				618413A3EC554BA489A98149 /* libRNFirebase.a */,
+				44C9348580424D3CBD437A2C /* libAirMaps.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -735,6 +756,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = A1598A991F72528600AC6AAB /* Products */;
+					ProjectRef = 5378F61FFCEA4CACA54530FA /* AirMaps.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1043,6 +1068,13 @@
 			remoteRef = A12CCA8D1F67F04F00EEBA69 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A1598A9D1F72528600AC6AAB /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = A1598A9C1F72528600AC6AAB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A1F62EFA1F6BD86700B3B7E2 /* libRNFirebase.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1207,9 +1239,14 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 				INFOPLIST_FILE = FlagQuiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FlagQuiz\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1238,9 +1275,14 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 				INFOPLIST_FILE = FlagQuiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FlagQuiz\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
