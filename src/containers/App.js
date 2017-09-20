@@ -16,13 +16,7 @@ global.Intl = require('intl');
 
 [fr].forEach(addLocaleData);
 
-const SimpleApp = StackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: {
-      header: null,
-    },
-  },
+const GameStackNavigator = StackNavigator({
   Game: {
     screen: Game,
     navigationOptions: {
@@ -35,6 +29,22 @@ const SimpleApp = StackNavigator({
       header: null,
     },
   },
+}, {
+  mode: 'modal',
+});
+
+const SimpleApp = StackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Game: {
+    screen: GameStackNavigator,
+  },
+}, {
+  mode: 'card',
 });
 
 export default SimpleApp;

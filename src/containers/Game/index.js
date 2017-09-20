@@ -10,6 +10,7 @@ import {
   Dimensions,
   Animated,
   Easing,
+  Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -127,6 +128,10 @@ class Game extends Component {
     }
   }
 
+  componentDidMount() {
+    this.input.focus();
+  }
+
   componentWillUnmount() {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
@@ -232,14 +237,14 @@ class Game extends Component {
   }
 
   keyboardWillHide = (e) => {
-    Animated.timing(
-      this.keyboardHeight,
-      {
-        toValue: e.endCoordinates.height,
-        duration: e.duration,
-        easing: Easing.inOut(Easing.ease),
-      },
-    ).start();
+    // Animated.timing(
+    //   this.keyboardHeight,
+    //   {
+    //     toValue: e.endCoordinates.height,
+    //     duration: e.duration,
+    //     easing: Easing.inOut(Easing.ease),
+    //   },
+    // ).start();
   }
 
   handleNextQuestion = () => {
@@ -253,7 +258,27 @@ class Game extends Component {
   }
 
   handleHint = () => {
+    Alert.alert(
+      this.props.intl.formatMessage(translations.alertTitle),
+      this.props.intl.formatMessage(translations.alertDescription),
+      [
+        {
+          text: this.props.intl.formatMessage(translations.alertButtonOk),
+          onPress: this.handleHintSuccess,
+        },
+        {
+          text: this.props.intl.formatMessage(translations.alertButtonCancel),
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false },
+    );
     this.props.questionActions.questionHintRequest();
+  }
+
+  handleHintSuccess = () => {
+    const currentQuestion = this.props.question.get('current');
+    this.props.navigation.navigate('Hint', { flag: currentQuestion.get('flag') });
   }
 
   render() {
@@ -371,8 +396,8 @@ class Game extends Component {
               autoComplete={false}
               keyboardType={'default'}
               returnKeyType={'done'}
-              autoFocus
               caretHidden
+              autoFocus
               tintColor={Colors.white}
               selectionColor={Colors.white}
               ref={(ref) => {

@@ -113,16 +113,15 @@ export default StyleSheet.create({
     marginRight: 10,
     alignItems: 'flex-end',
     justifyContent: 'center',
-    zIndex: 100,
+    zIndex: 102,
   },
 
   buttonWrapper: {
     position: 'absolute',
     top: 0,
-    left: 0,
     bottom: 0,
-    right: 0,
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 101,
   },
 });
