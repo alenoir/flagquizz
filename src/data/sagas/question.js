@@ -1,6 +1,6 @@
 import { put, takeLatest, fork, select } from 'redux-saga/effects';
 import { List, fromJS } from 'immutable';
-import Fuse from 'fuse.js';
+import Levenshtein from 'levenshtein';
 
 import {
   QUESTION_REQUEST,
@@ -15,16 +15,12 @@ function* handleQuestionRequest() {
   const state = yield select();
   const flagState = state.flag;
   const questionState = state.question;
-  console.log('flagState', flagState);
 
   const filteredFlags = flagState.get('list').filter((flag) => {
     const alreadyAnswered = questionState.get('answered').filter((question) => (question.get('flag').get('alpha2Code') === flag.get('alpha2Code'))).size;
-    console.log('alreadyAnswered', alreadyAnswered);
-
     return !alreadyAnswered;
   });
 
-  console.log('filteredFlags', filteredFlags);
   const nextFlag = filteredFlags.get(Math.floor(Math.random() * filteredFlags.size));
 
   const question = {
@@ -41,33 +37,33 @@ function* handleQuestionAnswerRequest(action) {
   let valid = false;
   let currentQuestion = questionState.get('current');
 
+  const currentFlag = currentQuestion.get('flag').toJS();
+  const answer = action.payload.answer.toLowerCase();
   const answerObject = {
-    answer: action.payload.answer,
+    answer,
   };
-  const options = {
-    shouldSort: true,
-    threshold: 0.6,
-    location: 0,
-    distance: 10,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    includeScore: true,
-    includeMatches: true,
-    keys: ['translations', 'name', 'nativeName', 'demonym'],
+
+  let score = 1000;
+
+  answerObject.levenResult = {
+    name: (new Levenshtein(currentFlag.name.toLowerCase(), answer)).distance,
+    nativeName: (new Levenshtein(currentFlag.nativeName.toLowerCase(), answer)).distance,
+    demonym: (new Levenshtein(currentFlag.nativeName.toLowerCase(), answer)).distance,
   };
-  const fuzzySearch = new Fuse([currentQuestion.get('flag').toJS()], options);
-  const fuzzyResult = fuzzySearch.search(action.payload.answer);
 
-  console.log('fuzzyResult', fuzzyResult, fuzzySearch);
+  Object.keys(currentFlag.translations).forEach((key) => {
+    const translation = currentFlag.translations[key].toLowerCase();
+    answerObject.levenResult[key] = (new Levenshtein(translation, answer)).distance;
+  });
 
-  answerObject.fuzzyResult = fuzzyResult;
+  score = Object.values(answerObject.levenResult).reduce((result, item) =>
+    (result > item ? item : result), score);
 
-  console.log('answerObject', answerObject);
   currentQuestion = currentQuestion.set('answers', currentQuestion.get('answers') || List());
   currentQuestion = currentQuestion.set('answers', currentQuestion.get('answers').push(fromJS(answerObject)));
   currentQuestion = currentQuestion.set('answerTime', new Date());
 
-  if (fuzzyResult[0] && fuzzyResult[0].matches.length > 0) {
+  if (score < 3) {
     valid = true;
   }
   if (valid) {

@@ -7,6 +7,7 @@ import {
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#63E2C4',
   },
 
   top: {
@@ -16,7 +17,6 @@ export default StyleSheet.create({
   content: {
     flex: 3,
     flexDirection: 'row',
-
   },
 
   colLeft: {

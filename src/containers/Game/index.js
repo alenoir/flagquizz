@@ -127,6 +127,11 @@ class Game extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
   changeStep = (step) => {
     let nextImageScale = 1;
     let nextInputOpacity = 1;
@@ -215,11 +220,6 @@ class Game extends Component {
     ]).start();
   }
 
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
   keyboardWillShow = (e) => {
     Animated.timing(
       this.keyboardHeight,
@@ -243,7 +243,6 @@ class Game extends Component {
   }
 
   handleNextQuestion = () => {
-    console.log('handleNextQuestion', this.state.step);
     if (this.state.step === gameSteps.win) {
       this.props.questionActions.questionRequest();
     }
@@ -370,6 +369,9 @@ class Game extends Component {
                 setTimeout(() => {
                   this.input.focus();
                 }, 10);
+                setTimeout(() => {
+                  this.input.focus();
+                }, 100);
               }}
             />
             <View
