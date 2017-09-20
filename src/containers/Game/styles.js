@@ -85,6 +85,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'center',
+    zIndex: 100,
   },
   inputText: {
     fontFamily: Fonts.Brandon,
@@ -103,6 +104,16 @@ export default StyleSheet.create({
     marginRight: 60,
     marginLeft: 60,
     opacity: 0.3,
+  },
+  buttonHint: {
+    position: 'absolute',
+    right: 10,
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    zIndex: 100,
   },
 
   buttonWrapper: {

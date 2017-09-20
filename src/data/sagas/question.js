@@ -5,10 +5,13 @@ import Levenshtein from 'levenshtein';
 import {
   QUESTION_REQUEST,
   QUESTION_ANSWER_REQUEST,
+  QUESTION_HINT_REQUEST,
 
   questionSuccess,
   questionAnswerError,
   questionAnswerSuccess,
+  questionHintSuccess,
+  questionSkiped,
 } from '../actions/question';
 
 function* handleQuestionRequest() {
@@ -21,9 +24,20 @@ function* handleQuestionRequest() {
     return !alreadyAnswered;
   });
 
-  const nextFlag = filteredFlags.get(Math.floor(Math.random() * filteredFlags.size));
+  let currentQuestion = questionState.get('current');
 
-  const question = {
+  if (currentQuestion) {
+    const skipObject = {
+      time: new Date(),
+    };
+    currentQuestion = currentQuestion.set('skips', currentQuestion.get('skips') || List());
+    currentQuestion = currentQuestion.set('skips', currentQuestion.get('skips').push(fromJS(skipObject)));
+    yield put(questionSkiped({ question: currentQuestion }));
+  }
+
+  const nextFlag = filteredFlags.get(Math.floor(Math.random() * filteredFlags.size));
+  const skipedQuestions = questionState.get('skiped') || Map();
+  const question = skipedQuestions.get(nextFlag.get('alpha2Code')) || {
     startTime: new Date(),
     flag: nextFlag,
     answers: [],
@@ -73,6 +87,23 @@ function* handleQuestionAnswerRequest(action) {
   }
 }
 
+
+function* handleQuestionHintRequest() {
+  const state = yield select();
+  const questionState = state.question;
+  let currentQuestion = questionState.get('current');
+
+  const hintObject = {
+    hintType: 'map',
+    time: new Date(),
+  };
+
+  currentQuestion = currentQuestion.set('hints', currentQuestion.get('hints') || List());
+  currentQuestion = currentQuestion.set('hints', currentQuestion.get('hints').push(fromJS(hintObject)));
+
+  yield put(questionHintSuccess({ question: currentQuestion }));
+}
+
 function* watchQuestionRequest() {
   yield takeLatest(QUESTION_REQUEST, handleQuestionRequest);
 }
@@ -81,10 +112,15 @@ function* watchQuestionAnswerRequest() {
   yield takeLatest(QUESTION_ANSWER_REQUEST, handleQuestionAnswerRequest);
 }
 
+function* watchQuestionHintRequest() {
+  yield takeLatest(QUESTION_HINT_REQUEST, handleQuestionHintRequest);
+}
+
 
 export default function* rootSaga() {
   yield [
     fork(watchQuestionRequest),
+    fork(watchQuestionHintRequest),
     fork(watchQuestionAnswerRequest),
   ];
 }

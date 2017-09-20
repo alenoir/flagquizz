@@ -252,6 +252,10 @@ class Game extends Component {
     this.props.questionActions.questionRequest();
   }
 
+  handleHint = () => {
+    this.props.questionActions.questionHintRequest();
+  }
+
   render() {
     const { question, answeredCount, flagCount } = this.props;
     const { step } = this.state;
@@ -394,6 +398,14 @@ class Game extends Component {
                 width: this.state.imageWidth * 0.8,
               }]}
             />
+            <TouchableOpacity
+              style={styles.buttonHint}
+              onPress={() => this.handleHint()}
+            >
+              <Image
+                source={Images.Hint}
+              />
+            </TouchableOpacity>
           </Animated.View>
           <Animated.View
             style={[styles.buttonWrapper, {
