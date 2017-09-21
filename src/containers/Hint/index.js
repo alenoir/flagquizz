@@ -5,11 +5,6 @@ import {
   View,
   TouchableOpacity,
   Image,
-  TextInput,
-  Keyboard,
-  Dimensions,
-  Animated,
-  Easing,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,7 +15,7 @@ import QuestionActions from '../../data/actions/question';
 
 import translations from './translations.js';
 import styles from './styles.js';
-import { Images, Colors } from '../../theme';
+import { Images } from '../../theme';
 
 class Hint extends Component {
   static propTypes = {
@@ -77,6 +72,13 @@ class Hint extends Component {
           showsBuildings={false}
           showsTraffic={false}
           showsIndoors={false}
+          zoomEnabled={false}
+          rotateEnabled={false}
+          scrollEnabled={false}
+          pitchEnabled={false}
+          toolbarEnabled={false}
+          cacheEnabled={false}
+          loadingEnabled={false}
           initialRegion={{
             latitude: lat,
             longitude: lng,

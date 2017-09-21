@@ -39,8 +39,20 @@ const SimpleApp = StackNavigator({
       header: null,
     },
   },
-  Game: {
+  Game_old: {
     screen: GameStackNavigator,
+  },
+  Game: {
+    screen: Game,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Hint: {
+    screen: Hint,
+    navigationOptions: {
+      header: null,
+    },
   },
 }, {
   mode: 'card',

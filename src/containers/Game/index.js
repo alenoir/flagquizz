@@ -93,7 +93,9 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    this.input.focus();
+    if (this.input) {
+      this.input.focus();
+    }
 
     this.advert = firebase.admob().rewarded('ca-app-pub-3076785724903283/8803823726');
     const AdRequest = firebase.admob.AdRequest;
@@ -118,7 +120,6 @@ class Game extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('++++++++', nextProps.question.get('succeded'), nextProps.question.get('succeded') !== this.props.question.get('succeded'));
     const nextState = {};
     if (nextProps.question.get('loading') !== this.props.question.get('loading') && nextProps.question.get('loading')) {
       nextState.step = gameSteps.loading;
@@ -147,13 +148,17 @@ class Game extends Component {
     if (currentQuestion && currentQuestion.get('flag')) {
       nextState.currentFlagImage = FlagImages[currentQuestion.get('flag').get('alpha2Code').toLowerCase()];
     }
-
+    
     this.setState(nextState);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.step !== this.state.step) {
       this.changeStep(this.state.step);
+    }
+
+    if (this.state.step === gameSteps.playing && this.input) {
+      this.input.focus();
     }
   }
 
@@ -261,7 +266,7 @@ class Game extends Component {
     ).start();
   }
 
-  keyboardWillHide = (e) => {
+  keyboardWillHide = () => {
     // Animated.timing(
     //   this.keyboardHeight,
     //   {
@@ -304,22 +309,19 @@ class Game extends Component {
   }
 
   handleHintSuccess = () => {
-    setTimeout(() => {
-      console.log(this.advert, this.advert.isLoaded());
-      if (this.advert.isLoaded()) {
-        this.advert.show();
-      } else {
-        const currentQuestion = this.props.question.get('current');
-        this.props.navigation.navigate('Hint', { flag: currentQuestion.get('flag') });
-      }
-    }, 10);
+    if (this.advert.isLoaded()) {
+      this.advert.show();
+    } else {
+      const currentQuestion = this.props.question.get('current');
+      this.props.navigation.navigate('Hint', { flag: currentQuestion.get('flag') });
+    }
   }
 
   render() {
     const { question, answeredCount, flagCount } = this.props;
     const { step } = this.state;
     if (step === gameSteps.loading) {
-      return <Text>Loading</Text>;
+      return <Text>*</Text>;
     }
 
     const currentQuestion = question.get('current');
