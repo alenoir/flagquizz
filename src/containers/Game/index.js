@@ -15,12 +15,14 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { injectIntl } from 'react-intl';
+import { NavigationActions } from 'react-navigation';
 
 import FlagImages from '../../assets/flags';
 import BackgroundFlag from '../../components/BackgroundFlag';
 import Badge from '../../components/Badge';
 import Score from '../../components/Score';
 import QuestionActions from '../../data/actions/question';
+import firebase from '../../data/services/firebase';
 
 import translations from './translations.js';
 import styles from './styles.js';
@@ -66,6 +68,8 @@ class Game extends Component {
     if (currentQuestion) {
       currentFlagImage = FlagImages[currentQuestion.get('flag').get('alpha2Code').toLowerCase()];
     }
+
+
     this.state = {
       step: currentQuestion ? gameSteps.playing : gameSteps.loading,
       flag: null,
@@ -86,6 +90,31 @@ class Game extends Component {
     if (!question.get('current')) {
       this.props.questionActions.questionRequest();
     }
+  }
+
+  componentDidMount() {
+    this.input.focus();
+
+    this.advert = firebase.admob().rewarded('ca-app-pub-3076785724903283/8803823726');
+    const AdRequest = firebase.admob.AdRequest;
+    const request = new AdRequest();
+    // request.addKeyword('foo');
+
+    // Load the advert with our AdRequest
+    this.advert.loadAd(request.build());
+
+    this.advert.on('onAdLoaded', () => {
+      console.log('Advert ready to show.');
+    });
+
+    this.advert.on('onRewarded', (event) => {
+      console.log('Advert onRewarded.', event);
+      const currentQuestion = this.props.question.get('current');
+      this.props.navigation.navigate('Hint', { flag: currentQuestion.get('flag') });
+    });
+    this.advert.on('onAdFailedToLoad', (event) => {
+      console.log('Advert onAdFailedToLoad.', event);
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -126,10 +155,6 @@ class Game extends Component {
     if (prevState.step !== this.state.step) {
       this.changeStep(this.state.step);
     }
-  }
-
-  componentDidMount() {
-    this.input.focus();
   }
 
   componentWillUnmount() {
@@ -269,16 +294,25 @@ class Game extends Component {
         {
           text: this.props.intl.formatMessage(translations.alertButtonCancel),
           style: 'cancel',
+          onPress: () => this.input.focus(),
         },
       ],
       { cancelable: false },
     );
+
     this.props.questionActions.questionHintRequest();
   }
 
   handleHintSuccess = () => {
-    const currentQuestion = this.props.question.get('current');
-    this.props.navigation.navigate('Hint', { flag: currentQuestion.get('flag') });
+    setTimeout(() => {
+      console.log(this.advert, this.advert.isLoaded());
+      if (this.advert.isLoaded()) {
+        this.advert.show();
+      } else {
+        const currentQuestion = this.props.question.get('current');
+        this.props.navigation.navigate('Hint', { flag: currentQuestion.get('flag') });
+      }
+    }, 10);
   }
 
   render() {
@@ -302,7 +336,7 @@ class Game extends Component {
         >
           <TouchableOpacity
             style={styles.buttonBack}
-            onPress={() => this.props.navigation.goBack()}
+            onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
           >
             <Image
               source={Images.Back}

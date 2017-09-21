@@ -45,7 +45,6 @@ class Hint extends Component {
     const randLatDelta = Math.floor(Math.random() * (delta - 30)) * (minusLat ? -1 : 1);
     const randLngDelta = Math.floor(Math.random() * (delta - 30)) * (minusLng ? -1 : 1);
 
-    console.log(flag.toJS(), randLatDelta, randLngDelta, minusLat, minusLng);
     this.state = {
       lat: (flag.get('latlng').get('0') + randLatDelta),
       lng: (flag.get('latlng').get('1') + randLngDelta),

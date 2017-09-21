@@ -2,6 +2,8 @@ import { put, takeLatest, fork, select } from 'redux-saga/effects';
 import { List, fromJS } from 'immutable';
 import Levenshtein from 'levenshtein';
 
+import firebase from '../services/firebase';
+
 import {
   QUESTION_REQUEST,
   QUESTION_ANSWER_REQUEST,
@@ -33,6 +35,11 @@ function* handleQuestionRequest() {
     currentQuestion = currentQuestion.set('skips', currentQuestion.get('skips') || List());
     currentQuestion = currentQuestion.set('skips', currentQuestion.get('skips').push(fromJS(skipObject)));
     yield put(questionSkiped({ question: currentQuestion }));
+
+    firebase.analytics().logEvent('skip', {
+      flagCode: currentQuestion.get('flag').get('alpha2Code'),
+      flagName: currentQuestion.get('flag').get('name'),
+    });
   }
 
   const nextFlag = filteredFlags.get(Math.floor(Math.random() * filteredFlags.size));
@@ -85,6 +92,13 @@ function* handleQuestionAnswerRequest(action) {
   } else {
     yield put(questionAnswerError({ question: currentQuestion }));
   }
+
+  firebase.analytics().logEvent('answer', {
+    flagCode: currentQuestion.get('flag').get('alpha2Code'),
+    flagName: currentQuestion.get('flag').get('name'),
+    answer,
+    valid,
+  });
 }
 
 
@@ -102,6 +116,12 @@ function* handleQuestionHintRequest() {
   currentQuestion = currentQuestion.set('hints', currentQuestion.get('hints').push(fromJS(hintObject)));
 
   yield put(questionHintSuccess({ question: currentQuestion }));
+
+  firebase.analytics().logEvent('hint', {
+    flagCode: currentQuestion.get('flag').get('alpha2Code'),
+    flagName: currentQuestion.get('flag').get('name'),
+    hintType: 'map',
+  });
 }
 
 function* watchQuestionRequest() {

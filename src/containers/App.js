@@ -11,7 +11,6 @@ import Home from './Home';
 import Game from './Game';
 import Hint from './Hint';
 
-
 global.Intl = require('intl');
 
 [fr].forEach(addLocaleData);

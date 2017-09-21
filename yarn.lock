@@ -4095,9 +4095,9 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-firebase@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-2.2.0.tgz#2ff935db23e3b58ccc77fc62178eed484ad1eee1"
+react-native-firebase@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-2.2.1.tgz#7f22245eba951cce4b72e4653170d59004c9b561"
   dependencies:
     bows "^1.6.0"
     prop-types "^15.5.10"
