@@ -66,15 +66,19 @@ function* handleQuestionAnswerRequest(action) {
 
   let score = 1000;
 
+  console.log('currentFlag', currentFlag);
+
   answerObject.levenResult = {
     name: (new Levenshtein(currentFlag.name.toLowerCase(), answer)).distance,
     nativeName: (new Levenshtein(currentFlag.nativeName.toLowerCase(), answer)).distance,
-    demonym: (new Levenshtein(currentFlag.nativeName.toLowerCase(), answer)).distance,
+    demonym: (new Levenshtein(currentFlag.demonym.toLowerCase(), answer)).distance,
   };
 
   Object.keys(currentFlag.translations).forEach((key) => {
-    const translation = currentFlag.translations[key].toLowerCase();
-    answerObject.levenResult[key] = (new Levenshtein(translation, answer)).distance;
+    if (currentFlag.translations[key]) {
+      const translation = currentFlag.translations[key].toLowerCase();
+      answerObject.levenResult[key] = (new Levenshtein(translation, answer)).distance;
+    }
   });
 
   score = Object.values(answerObject.levenResult).reduce((result, item) =>
