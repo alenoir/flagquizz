@@ -1,0 +1,27 @@
+[
+  {
+    "id": "Game.button.skip.title",
+    "description": "Game.button.skip.title",
+    "defaultMessage": "Passer"
+  },
+  {
+    "id": "Game.alert.title",
+    "description": "Game.alert.title",
+    "defaultMessage": "Besoin d'aide"
+  },
+  {
+    "id": "Game.alert.description",
+    "description": "Game.alert.description",
+    "defaultMessage": "Un indice s'affichera après cette pub"
+  },
+  {
+    "id": "Game.alert.button.ok",
+    "description": "Game.alert.button.ok",
+    "defaultMessage": "OK"
+  },
+  {
+    "id": "Game.alert.button.cancel",
+    "description": "Game.alert.button.cancel",
+    "defaultMessage": "Non merci"
+  }
+]

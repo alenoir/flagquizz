@@ -1,0 +1,17 @@
+[
+  {
+    "id": "Home.title",
+    "description": "Home.title",
+    "defaultMessage": "Flag"
+  },
+  {
+    "id": "Home.subtitle",
+    "description": "Home.subtitle",
+    "defaultMessage": "QUIZ"
+  },
+  {
+    "id": "Home.button.title",
+    "description": "Home.button.title",
+    "defaultMessage": "Play"
+  }
+]

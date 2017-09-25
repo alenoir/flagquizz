@@ -1,0 +1,24 @@
+{ 
+  "fr": {
+    "Game.button.skip.title": "Passer",
+    "Game.alert.title": "Besoin d'aide",
+    "Game.alert.description": "Un indice s'affichera après cette pub",
+    "Game.alert.button.ok": "OK",
+    "Game.alert.button.cancel": "Non merci",
+    "Hint.title": "Le pays que vous essayez de deviner est dans cette zone",
+    "Home.title": "Flag",
+    "Home.subtitle": "QUIZ",
+    "Home.button.title": "Jouer"
+  },
+  "en": {
+    "Game.button.skip.title": "Skip",
+    "Game.alert.title": "Need help",
+    "Game.alert.description": "A hint will appear after this ad",
+    "Game.alert.button.ok": "OK",
+    "Game.alert.button.cancel": "Cancel",
+    "Hint.title": "The country you are trying to guess is in this area",
+    "Home.title": "Flag",
+    "Home.subtitle": "QUIZ",
+    "Home.button.title": "Play"
+  } 
+}

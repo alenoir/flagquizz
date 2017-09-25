@@ -1,3 +1,9 @@
 {
-  "presets": ["react-native"]
+  "presets": ["react-native"],
+  "plugins": [
+    ["react-intl", {
+        "messagesDir": "./src/assets/translations/messages/",
+        "enforceDescriptions": true,
+    }]
+  ]
 }

@@ -65,9 +65,7 @@ function* handleQuestionAnswerRequest(action) {
   };
 
   let score = 1000;
-
-  console.log('currentFlag', currentFlag);
-
+  
   answerObject.levenResult = {
     name: (new Levenshtein(currentFlag.name.toLowerCase(), answer)).distance,
     nativeName: (new Levenshtein(currentFlag.nativeName.toLowerCase(), answer)).distance,

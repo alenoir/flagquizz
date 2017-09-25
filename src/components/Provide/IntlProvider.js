@@ -1,6 +1,16 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { NativeModules } from 'react-native';
+
+import localeData from '../../assets/translations/locales/data.json';
+
+const locale = (NativeModules.SettingsManager.settings.AppleLocale).split('_')[0];
+
+const messages = localeData[locale] || localeData.en;
+
+console.log(locale);
+
 
 class ProvideIntl extends Component {
   static propTypes = {
@@ -13,6 +23,7 @@ class ProvideIntl extends Component {
         {...this.props.intl}
         defaultLocale={'fr'}
         locale="fr"
+        messages={messages}
       >
         {this.props.children}
       </IntlProvider>

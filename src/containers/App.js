@@ -6,6 +6,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/fr';
 import { addLocaleData } from 'react-intl';
 import fr from 'react-intl/locale-data/fr';
+import en from 'react-intl/locale-data/en';
 
 import Home from './Home';
 import Game from './Game';
@@ -13,7 +14,7 @@ import Hint from './Hint';
 
 global.Intl = require('intl');
 
-[fr].forEach(addLocaleData);
+[fr, en].forEach(addLocaleData);
 
 const GameStackNavigator = StackNavigator({
   Game: {
